@@ -120,6 +120,12 @@ int list_len (struct list* list) {
  */
 void list_map1 (void (*f) (element_t*, element_t), struct list* out_list, struct list* in_list) {
   // TODO
+  out_list->len = 0;
+  for (int i = 0; i < in_list->len; i++) {
+    element_t result = NULL;
+    f(&result, in_list->data[i]);
+    list_append(out_list, result);
+  }
 }
 
 /**
@@ -136,6 +142,12 @@ void list_map1 (void (*f) (element_t*, element_t), struct list* out_list, struct
  */
 void list_map2 (void (*f) (element_t*, element_t, element_t), struct list* out_list, struct list* in_list0, struct list* in_list1) {
   // TODO
+  out_list->len = 0;
+  for (int i = 0; i < in_list0->len && i < in_list1->len; i++) {
+    element_t result = NULL;
+    f(&result, in_list0->data[i], in_list1->data[i]);
+    list_append(out_list, result);
+  }
 }
 
 /**
@@ -149,6 +161,9 @@ void list_map2 (void (*f) (element_t*, element_t, element_t), struct list* out_l
  */
 void list_foldl (void (*f) (element_t*, element_t, element_t), element_t* out_element_p,  struct list* in_list) {
   // TODO
+  for (int i = 0; i < in_list->len; i++) {
+    f(out_element_p, *out_element_p, in_list->data[i]);
+  }
 }
 
 /**
@@ -162,6 +177,12 @@ void list_foldl (void (*f) (element_t*, element_t, element_t), element_t* out_el
  */
 void list_filter (int (*f) (element_t), struct list* out_list, struct list* in_list) {
   // TODO
+  out_list->len = 0;
+  for (int i = 0; i < in_list->len; i++) {
+    if (f(in_list->data[i])) {
+      list_append(out_list, in_list->data[i]);
+    }
+  }
 }
 
 /**
