@@ -63,13 +63,7 @@ void print_with_space(element_t elem) {
 void find_max(element_t* out, element_t acc, element_t elem) {
   int* max_so_far = (int*)acc;
   int* current = (int*)elem;
-  int* max_ptr = (int*)*out;
-  
-  if (max_ptr == NULL) {
-      max_ptr = malloc(sizeof(int));
-      *out = max_ptr;
-  }
-  *max_ptr = (*current > *max_so_far) ? *current : *max_so_far;
+  if (*current > *max_so_far) *max_so_far = *current;
 }
 
 int main (int argc, char** argv) {
